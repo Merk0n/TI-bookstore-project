@@ -35,6 +35,17 @@ $sql2 = "SELECT username FROM users WHERE id = '$userId'";
 $result2 = mysqli_query($conn, $sql2);
 $user = mysqli_fetch_assoc($result2);
 
+// Fetch purchases made by the user
+$sql3 = "SELECT books.title, books.author, purchases.price FROM purchases JOIN books ON purchases.book_id = books.id WHERE purchases.user_id = '$userId'";
+$result3 = mysqli_query($conn, $sql3);
+
+// Calculate the total price of all purchases
+$totalPrice = 0;
+$result4 = mysqli_query($conn, $sql3);
+while ($row = mysqli_fetch_assoc($result4)) {
+    $totalPrice += $row['price'];
+}
+
 // Handle logout
 if (isset($_POST['logout'])) {
     session_destroy();
@@ -88,6 +99,24 @@ if ($row) {
     </table>
 
     <a href="cart.php">View Cart (<?php echo $cartCount; ?>)</a>
+
+
+    <h2>Your Purchases</h2>
+    <table>
+        <tr>
+            <th>Title</th>
+            <th>Author</th>
+            <th>Price</th>
+        </tr>
+        <?php while ($row = mysqli_fetch_assoc($result3)): ?>
+            <tr>
+                <td><?php echo $row['title']; ?></td>
+                <td><?php echo $row['author']; ?></td>
+                <td><?php echo $row['price']; ?></td>
+            </tr>
+        <?php endwhile; ?>
+    </table>
+    <h3>Total Price: <?php echo $totalPrice; ?></h3>
 
 </body>
 </html>
