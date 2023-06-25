@@ -39,53 +39,62 @@ if (isset($_POST['delete'])) {
 <head>
     <title>Admin Panel</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="mt-5 font-weight-bold">Admin Panel</h1>
-        <form method="POST" action="">
-            <button type="submit" name="logout" class="btn btn-warning">Logout</button>
-        </form>
+    <div class="content-wrapper">
+        <div class="container">
+            <h1 class="mt-5 font-weight-bold">Admin Panel</h1>
+            <form method="POST" action="">
+                <button type="submit" name="logout" class="btn btn-warning">Logout</button>
+            </form>
 
-        <h2 class="mt-5">Admin Dashboard</h2>
-        <form method="GET" action="admin_books.php">
-            <button type="submit" class="btn btn-secondary">Manage Books</button>
-        </form>
-        <br>
-    
-        <h2 class="mt-5">Purchases</h2>
-        <table class="table">
-            <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>User ID</th>
-                    <th>Username</th>
-                    <th>Book Title</th>
-                    <th>Book Author</th>
-                    <th>Price</th>
-                    <th>Action</th>
-                </tr>
-            </thead>
-            <tbody>
-                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+            <h2 class="mt-5">Admin Dashboard</h2>
+            <form method="GET" action="admin_books.php">
+                <button type="submit" class="btn btn-secondary">Manage Books</button>
+            </form>
+            <br>
+        
+            <h2 class="mt-5">Purchases</h2>
+            <table class="table">
+                <thead>
                     <tr>
-                        <td><?php echo $row['id']; ?></td>
-                        <td><?php echo $row['user_id']; ?></td>
-                        <td><?php echo $row['username']; ?></td>
-                        <td><?php echo $row['title']; ?></td>
-                        <td><?php echo $row['author']; ?></td>
-                        <td>$<?php echo $row['price']; ?></td>
-                        <td>
-                            <form method="POST" action="">
-                                <input type="hidden" name="purchase_id" value="<?php echo $row['id']; ?>">
-                                <button type="submit" name="delete" class="btn btn-danger">Delete</button>
-                            </form>
-                        </td>
+                        <th>ID</th>
+                        <th>User ID</th>
+                        <th>Username</th>
+                        <th>Book Title</th>
+                        <th>Book Author</th>
+                        <th>Price</th>
+                        <th>Action</th>
                     </tr>
-                <?php endwhile; ?>
-            </tbody>
-        </table>
+                </thead>
+                <tbody>
+                    <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                        <tr>
+                            <td><?php echo $row['id']; ?></td>
+                            <td><?php echo $row['user_id']; ?></td>
+                            <td><?php echo $row['username']; ?></td>
+                            <td><?php echo $row['title']; ?></td>
+                            <td><?php echo $row['author']; ?></td>
+                            <td>$<?php echo $row['price']; ?></td>
+                            <td>
+                                <form method="POST" action="">
+                                    <input type="hidden" name="purchase_id" value="<?php echo $row['id']; ?>">
+                                    <button type="submit" name="delete" class="btn btn-danger">Delete</button>
+                                </form>
+                            </td>
+                        </tr>
+                    <?php endwhile; ?>
+                </tbody>
+            </table>
+        </div>
     </div>
+    
+    <footer class="footer">
+        <div class="container">
+            <p class="text-center m-0">&#9749; Michał Marek - Techniki Internetu(2023L)</p>
+        </div>
+    </footer>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>

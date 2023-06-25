@@ -47,56 +47,65 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 <head>
     <title>Online Bookstore - Login/Register</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="stylesheet" href="./styles.css">
 </head>
 <body>
-    <div class="container">
-        <h1 class="my-5 font-weight-bold">Online Bookstore</h1>
+    <div class="content-wrapper">
+        <div class="container">
+            <h1 class="my-5 font-weight-bold">Online Bookstore</h1>
 
-        <div class="row">
-            <div class="col-md-6">
-                <h2>Login</h2>
-                <form method="POST" action="">
-                    <?php if (isset($loginError)): ?>
-                        <div class="alert alert-danger"><?php echo $loginError; ?></div>
-                    <?php endif; ?>
-                    <div class="form-group">
-                        <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" class="form-control" required>
-                    </div>
-                    <button type="submit" name="login" class="btn btn-primary">Login</button>
-                </form>
+            <div class="row">
+                <div class="col-md-6">
+                    <h2>Login</h2>
+                    <form method="POST" action="">
+                        <?php if (isset($loginError)): ?>
+                            <div class="alert alert-danger"><?php echo $loginError; ?></div>
+                        <?php endif; ?>
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" id="username" name="username" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                        </div>
+                        <button type="submit" name="login" class="btn btn-primary">Login</button>
+                    </form>
+                </div>
+
+                <div class="col-md-6">
+                    <h2>Register</h2>
+                    <form method="POST" action="">
+                        <?php if (isset($registrationError)): ?>
+                            <div class="alert alert-danger"><?php echo $registrationError; ?></div>
+                        <?php endif; ?>
+                        <?php if (isset($registrationSuccess)): ?>
+                            <div class="alert alert-success"><?php echo $registrationSuccess; ?></div>
+                        <?php endif; ?>
+                        <div class="form-group">
+                            <label for="username">Username:</label>
+                            <input type="text" id="username" name="username" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="password">Password:</label>
+                            <input type="password" id="password" name="password" class="form-control" required>
+                        </div>
+                        <button type="submit" name="register" class="btn btn-primary">Register</button>
+                    </form>
+                </div>
             </div>
 
-            <div class="col-md-6">
-                <h2>Register</h2>
-                <form method="POST" action="">
-                    <?php if (isset($registrationError)): ?>
-                        <div class="alert alert-danger"><?php echo $registrationError; ?></div>
-                    <?php endif; ?>
-                    <?php if (isset($registrationSuccess)): ?>
-                        <div class="alert alert-success"><?php echo $registrationSuccess; ?></div>
-                    <?php endif; ?>
-                    <div class="form-group">
-                        <label for="username">Username:</label>
-                        <input type="text" id="username" name="username" class="form-control" required>
-                    </div>
-                    <div class="form-group">
-                        <label for="password">Password:</label>
-                        <input type="password" id="password" name="password" class="form-control" required>
-                    </div>
-                    <button type="submit" name="register" class="btn btn-primary">Register</button>
-                </form>
-            </div>
+            <form method="POST" action="admin_login.php">
+                <button type="submit" class="btn btn-secondary mt-3">Admin Panel</button>
+            </form>
         </div>
-
-        <form method="POST" action="admin_login.php">
-            <button type="submit" class="btn btn-secondary mt-3">Admin Panel</button>
-        </form>
     </div>
+
+    <footer class="footer">
+        <div class="container">
+            <p class="text-center m-0">&#9749; Michał Marek - Techniki Internetu(2023L)</p>
+        </div>
+    </footer>
 
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
