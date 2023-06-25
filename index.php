@@ -46,31 +46,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
 <html>
 <head>
     <title>Online Bookstore - Login/Register</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Online Bookstore</h1>
-    <h2>Login</h2>
-    <?php if (isset($loginError)) echo $loginError; ?>
-    <form method="POST" action="">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        <input type="submit" name="login" value="Login">
-    </form>
+    <div class="container">
+        <h1 class="my-5 font-weight-bold">Online Bookstore</h1>
 
-    <h2>Register</h2>
-    <?php if (isset($registrationError)) echo $registrationError; ?>
-    <?php if (isset($registrationSuccess)) echo $registrationSuccess; ?>
-    <form method="POST" action="">
-        <label for="username">Username:</label>
-        <input type="text" id="username" name="username" required><br><br>
-        <label for="password">Password:</label>
-        <input type="password" id="password" name="password" required><br><br>
-        <input type="submit" name="register" value="Register">
-    </form>
+        <div class="row">
+            <div class="col-md-6">
+                <h2>Login</h2>
+                <form method="POST" action="">
+                    <?php if (isset($loginError)): ?>
+                        <div class="alert alert-danger"><?php echo $loginError; ?></div>
+                    <?php endif; ?>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                    <button type="submit" name="login" class="btn btn-primary">Login</button>
+                </form>
+            </div>
 
-    <form method="POST" action="admin_login.php">
-        <input type="submit" value="Admin Panel">
+            <div class="col-md-6">
+                <h2>Register</h2>
+                <form method="POST" action="">
+                    <?php if (isset($registrationError)): ?>
+                        <div class="alert alert-danger"><?php echo $registrationError; ?></div>
+                    <?php endif; ?>
+                    <?php if (isset($registrationSuccess)): ?>
+                        <div class="alert alert-success"><?php echo $registrationSuccess; ?></div>
+                    <?php endif; ?>
+                    <div class="form-group">
+                        <label for="username">Username:</label>
+                        <input type="text" id="username" name="username" class="form-control" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password:</label>
+                        <input type="password" id="password" name="password" class="form-control" required>
+                    </div>
+                    <button type="submit" name="register" class="btn btn-primary">Register</button>
+                </form>
+            </div>
+        </div>
+
+        <form method="POST" action="admin_login.php">
+            <button type="submit" class="btn btn-secondary mt-3">Admin Panel</button>
+        </form>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

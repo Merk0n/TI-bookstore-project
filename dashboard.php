@@ -68,55 +68,67 @@ if ($row) {
 <html>
 <head>
     <title>Online Bookstore - Dashboard</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Online Bookstore - Dashboard</h1>
-    <h3>Welcome, <?php echo $user['username']; ?>!</h2>
-    <form method="POST" action="">
-        <input type="submit" name="logout" value="Logout">
-    </form>
-    <h2>Available Books</h2>
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Price</th>
-            <th>Action</th>
-        </tr>
-        <?php while ($row = mysqli_fetch_assoc($result)): ?>
-            <tr>
-                <td><?php echo $row['title']; ?></td>
-                <td><?php echo $row['author']; ?></td>
-                <td><?php echo $row['price']; ?></td>
-                <td>
-                    <form method="POST" action="">
-                        <input type="hidden" name="book_id" value="<?php echo $row['id']; ?>">
-                        <input type="submit" name="add_to_cart" value="Add to Cart">
-                    </form>
-                </td>
-            </tr>
-        <?php endwhile; ?>
-    </table>
+    <div class="container">
+        <h1 class="mt-5 font-weight-bold">Online Bookstore - Dashboard</h1>
+        <h3>Welcome, <?php echo $user['username']; ?>!</h2>
+        <form method="POST" action="">
+            <button type="submit" name="logout" class="btn btn-warning">Logout</button>
+        </form>
 
-    <a href="cart.php">View Cart (<?php echo $cartCount; ?>)</a>
+        <h2 class="mt-5">Available Books</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                    <tr>
+                        <td><?php echo $row['title']; ?></td>
+                        <td><?php echo $row['author']; ?></td>
+                        <td>$<?php echo $row['price']; ?></td>
+                        <td>
+                            <form method="POST" action="">
+                                <input type="hidden" name="book_id" value="<?php echo $row['id']; ?>">
+                                <button type="submit" name="add_to_cart" class="btn btn-primary">Add to Cart</button>
+                            </form>
+                        </td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
 
+        <a href="cart.php" class="btn btn-secondary">View Cart (<?php echo $cartCount; ?>)</a>
 
-    <h2>Your Purchases</h2>
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Price</th>
-        </tr>
-        <?php while ($row = mysqli_fetch_assoc($result3)): ?>
-            <tr>
-                <td><?php echo $row['title']; ?></td>
-                <td><?php echo $row['author']; ?></td>
-                <td><?php echo $row['price']; ?></td>
-            </tr>
-        <?php endwhile; ?>
-    </table>
-    <h3>Total Price: <?php echo $totalPrice; ?></h3>
+        <h2 class="mt-5">Your Purchases</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = mysqli_fetch_assoc($result3)): ?>
+                    <tr>
+                        <td><?php echo $row['title']; ?></td>
+                        <td><?php echo $row['author']; ?></td>
+                        <td>$<?php echo $row['price']; ?></td>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
+        <h3>Total Price: $<?php echo $totalPrice; ?></h3>
+    </div>
 
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>

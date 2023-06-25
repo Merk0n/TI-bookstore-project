@@ -33,18 +33,3 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['purchase'])) {
     exit;
 }
 ?>
-
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Online Bookstore - Purchase</title>
-</head>
-<body>
-    <h1>Online Bookstore - Purchase</h1>
-    <h2>Confirm Purchase</h2>
-    <p>Are you sure you want to purchase the selected books?</p>
-    <form method="POST" action="">
-        <input type="submit" name="purchase" value="Purchase">
-    </form>
-</body>
-</html>

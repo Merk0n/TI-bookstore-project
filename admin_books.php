@@ -79,59 +79,76 @@ if (isset($_POST['add_book'])) {
 <html>
 <head>
     <title>Admin Panel - Books</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
 </head>
 <body>
-    <h1>Admin Panel - Books</h1>
-    <form method="POST" action="">
-        <input type="submit" name="logout" value="Logout">
-    </form>
+    <div class="container">
+        <h1 class="mt-5 font-weight-bold">Admin Panel - Books</h1>
+        <form method="POST" action="">
+            <button type="submit" name="logout" class="btn btn-danger">Logout</button>
+        </form>
 
-    <!-- Display the error message if it exists -->
-    <?php if (isset($error)) : ?>
-        <p><?php echo $error; ?></p>
-    <?php endif; ?>
+        <!-- Display the error message if it exists -->
+        <?php if (isset($error)) : ?>
+            <p><?php echo $error; ?></p>
+        <?php endif; ?>
 
-    <h2>Books List</h2>
-    <table>
-        <tr>
-            <th>Title</th>
-            <th>Author</th>
-            <th>Price</th>
-            <th>Actions</th>
-        </tr>
-        <?php while ($row = mysqli_fetch_assoc($result)): ?>
-            <tr>
-                <form method="POST" action="">
-                    <td><input type="text" name="title" value="<?php echo $row['title']; ?>" required></td>
-                    <td><input type="text" name="author" value="<?php echo $row['author']; ?>" required></td>
-                    <td><input type="text" name="price" value="<?php echo $row['price']; ?>" required></td>
-                    <td>
-                        <input type="hidden" name="book_id" value="<?php echo $row['id']; ?>">
-                        <input type="submit" name="modify_book" value="Modify">
-                        <input type="submit" name="delete_book" value="Delete">
-                    </td>
-                </form>
-            </tr>
-        <?php endwhile; ?>
-    </table>
+        <h2 class="mt-5">Books List</h2>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Title</th>
+                    <th>Author</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <?php while ($row = mysqli_fetch_assoc($result)): ?>
+                    <tr>
+                        <form method="POST" action="">
+                            <td><?php echo $row['id']; ?></td>
+                            <td><input type="text" name="title" value="<?php echo $row['title']; ?>" required></td>
+                            <td><input type="text" name="author" value="<?php echo $row['author']; ?>" required></td>
+                            <td>$ <input type="text" name="price" value="<?php echo $row['price']; ?>" required></td>
+                            <td>
+                                <input type="hidden" name="book_id" value="<?php echo $row['id']; ?>">
+                                <button type="submit" name="modify_book" class="btn btn-primary">Modify</button>
+                                <button type="submit" name="delete_book" class="btn btn-danger">Delete</button>
+                            </td>
+                        </form>
+                    </tr>
+                <?php endwhile; ?>
+            </tbody>
+        </table>
 
-    <h2>Add New Book</h2>
-    <form method="POST" action="">
-        <label>Title:</label>
-        <input type="text" name="title" required><br>
+        <h2 class="mt-5">Add New Book</h2>
+        <form method="POST" action="">
+            <div class="form-group">
+                <label for="title">Title:</label>
+                <input type="text" name="title" id="title" class="form-control" required>
+            </div>
 
-        <label>Author:</label>
-        <input type="text" name="author" required><br>
+            <div class="form-group">
+                <label for="author">Author:</label>
+                <input type="text" name="author" id="author" class="form-control" required>
+            </div>
 
-        <label>Price:</label>
-        <input type="text" name="price" required><br>
+            <div class="form-group">
+                <label for="price">Price:</label>
+                <input type="text" name="price" id="price" class="form-control" required>
+            </div>
 
-        <input type="submit" name="add_book" value="Add Book">
-    </form>
+            <button type="submit" name="add_book" class="btn btn-success">Add Book</button>
+        </form>
 
-    <!-- Button to go back to admin.php -->
-    <form method="POST" action="admin.php">
-        <input type="submit" name="back_admin" value="Back to Admin Panel">
-    </form>
+        <!-- Button to go back to admin.php -->
+        <form method="POST" action="admin.php">
+            <button type="submit" name="back_admin" class="btn btn-secondary mt-3">Back to Admin Panel</button>
+        </form>
+    </div>
+
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
