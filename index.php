@@ -32,12 +32,20 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['register'])) {
     $username = $_POST['username'];
     $password = $_POST['password'];
 
-    // Insert new user into database
-    $sql = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
-    if (mysqli_query($conn, $sql)) {
-        $registrationSuccess = "Registration successful. Please log in.";
+    // Check if username already exists in the database
+    $checkSql = "SELECT id FROM users WHERE username = '$username'";
+    $checkResult = mysqli_query($conn, $checkSql);
+
+    if (mysqli_num_rows($checkResult) > 0) {
+        $registrationError = "Username already exists. Please choose a different username.";
     } else {
-        $registrationError = "Error registering the user.";
+        // Insert new user into database
+        $insertSql = "INSERT INTO users (username, password) VALUES ('$username', '$password')";
+        if (mysqli_query($conn, $insertSql)) {
+            $registrationSuccess = "Registration successful. Please log in.";
+        } else {
+            $registrationError = "Error registering the user.";
+        }
     }
 }
 ?>
